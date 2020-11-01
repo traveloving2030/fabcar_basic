@@ -144,8 +144,7 @@ function replacePrivateKey() {
   sed -i "s/CA1_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-ca.yaml
   PRIV_KEY=$(ls crypto-config/peerOrganizations/org2.example.com/ca/ | grep _sk)
   sed -i "s/CA2_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-ca.yaml
-  PRIV_KEY=$(ls crypto-config/peerOrganizations/org3.example.com/ca/ | grep _sk)
-  sed -i "s/CA3_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-ca.yaml
+
 
   echo "ORG AdminPrivate Key file exchange"
 
@@ -155,8 +154,6 @@ function replacePrivateKey() {
   sed -i "s/ORG1_ADMIN_PRIVATE_KEY/${PRIV_KEY}/g" connection.yaml
   PRIV_KEY=$(ls crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/ | grep _sk)
   sed -i "s/ORG2_ADMIN_PRIVATE_KEY/${PRIV_KEY}/g" connection.yaml
-  PRIV_KEY=$(ls crypto-config/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp/keystore/ | grep _sk)
-  sed -i "s/ORG3_ADMIN_PRIVATE_KEY/${PRIV_KEY}/g" connection.yaml
 }
 
 function generateChannel() {
@@ -169,7 +166,7 @@ function generateChannel() {
   # Generating genesis block for orderer
   echo
   echo "Generating genesis block for orderer"
-  configtxgen -profile ThreeOrgOrdererGenesis -outputBlock ./config/genesis.block
+  configtxgen -profile TwoOrgOrdererGenesis -outputBlock ./config/genesis.block
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate orderer genesis block..."
     exit 1
@@ -178,7 +175,7 @@ function generateChannel() {
   # Generating channel configuration transaction 'channel.tx'
   echo
   echo "Generating channel configuration transaction 'channel.tx'"
-  configtxgen -profile ThreeOrgChannel -outputCreateChannelTx ./config/channel.tx -channelID $CHANNEL_NAME
+  configtxgen -profile TwoOrgChannel -outputCreateChannelTx ./config/channel.tx -channelID $CHANNEL_NAME
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate channel configuration transaction..."
     exit 1
@@ -187,7 +184,7 @@ function generateChannel() {
   # Generating anchor peer update for Org1MSP
   echo
   echo "Generating anchor peer update for Org1MSP"
-  configtxgen -profile ThreeOrgChannel -outputAnchorPeersUpdate ./config/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+  configtxgen -profile TwoOrgChannel -outputAnchorPeersUpdate ./config/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate anchor peer update for Org1MSP..."
     exit 1
@@ -196,18 +193,9 @@ function generateChannel() {
   # Generate anchor peer update for Org2MSP
   echo
   echo "Generating anchor peer update for Org2MSP"
-  configtxgen -profile ThreeOrgChannel -outputAnchorPeersUpdate ./config/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
+  configtxgen -profile TwoOrgChannel -outputAnchorPeersUpdate ./config/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate anchor peer update for Org2MSP..."
-    exit 1
-  fi
-
-  # Generate anchor peer update for Org3MSP
-  echo
-  echo "Generating anchor peer update for Org3MSP"
-  configtxgen -profile ThreeOrgChannel -outputAnchorPeersUpdate ./config/Org3MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org3MSP
-  if [ "$?" -ne 0 ]; then
-    echo "Failed to generate anchor peer update for Org3MSP..."
     exit 1
   fi
   echo
