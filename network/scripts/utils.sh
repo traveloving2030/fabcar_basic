@@ -25,7 +25,7 @@ setGlobals() {
         CORE_PEER_MSPCONFIGPATH=${CONFIG_ROOT}/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
         if [ $PEER -eq 0 ]; then
             CORE_PEER_ADDRESS=peer0.org1.example.com:7051
-        else [ $PEER -eq 1 ]; then
+        elif [ $PEER -eq 1 ]; then
             CORE_PEER_ADDRESS=peer1.org1.example.com:7151
         fi
     elif [ $ORG -eq 2 ]; then
@@ -34,7 +34,7 @@ setGlobals() {
         CORE_PEER_MSPCONFIGPATH=${CONFIG_ROOT}/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
         if [ $PEER -eq 0 ]; then
             CORE_PEER_ADDRESS=peer0.org2.example.com:8051
-        else [ $PEER -eq 1 ]; then
+        elif [ $PEER -eq 1 ]; then
             CORE_PEER_ADDRESS=peer1.org2.example.com:8151
         fi
     else
