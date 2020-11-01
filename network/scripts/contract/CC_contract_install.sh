@@ -20,7 +20,7 @@ CC_SRC_PATH="github.com/chaincode/${CHAINCODE_NAME}"
 
 Orgs="$2"
 Peers="$3"
-: ${Orgs:="3"}
+: ${Orgs:="2"}
 : ${Peers:="2"}
 
 # Import shell script
@@ -43,7 +43,7 @@ installChaincodeOnAllPeers
 
 # Instantiate chaincode on peer0.org1
 echo "Instantiating chaincode on peer0.org1..."
-instantiateChaincode 0 1 "AND Org1MSP.member Org2MSP.member Org3MSP.member"
+instantiateChaincode 0 1 "AND Org1MSP.member Org2MSP.member"
 
 sleep ${DELAY}
 

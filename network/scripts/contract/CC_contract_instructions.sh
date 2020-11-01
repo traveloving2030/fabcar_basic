@@ -25,9 +25,9 @@ echo
 echo "===================== Chaincode Instructions ====================="
 echo
 
-# Invoke chaincode on peer0.org1 and peer0.org2 peer0.org3
-echo "Sending invoke transaction on peer0.org1 peer0.org2 peer0.org3..."
-chaincodeInvoke "0 1 0 2 0 3" "initLedger"
+# Invoke chaincode on peer0.org1 and peer0.org2
+echo "Sending invoke transaction on peer0.org1 peer0.org2"
+chaincodeInvoke "0 1 0 2" "initLedger"
 
 sleep ${DELAY}
 

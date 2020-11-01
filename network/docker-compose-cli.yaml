@@ -4,13 +4,8 @@ volumes:
   orderer.example.com:
   peer0.org1.example.com:
   peer1.org1.example.com:
-  peer2.org1.example.com:
   peer0.org2.example.com:
   peer1.org2.example.com:
-  peer2.org2.example.com:
-  peer0.org3.example.com:
-  peer1.org3.example.com:
-  peer2.org3.example.com:
 
 networks:
   basic:
@@ -39,14 +34,6 @@ services:
       service: peer1.org1.example.com
     networks:
       - basic
-
-  peer2.org1.example.com:
-    container_name: peer2.org1.example.com
-    extends:
-      file: docker-compose-org1.yaml
-      service: peer2.org1.example.com
-    networks:
-      - basic
   
   peer0.org2.example.com:
     container_name: peer0.org2.example.com
@@ -61,38 +48,6 @@ services:
     extends:
       file: docker-compose-org2.yaml
       service: peer1.org2.example.com
-    networks:
-      - basic
-
-  peer2.org2.example.com:
-    container_name: peer2.org2.example.com
-    extends:
-      file: docker-compose-org2.yaml
-      service: peer2.org2.example.com
-    networks:
-      - basic
-
-  peer0.org3.example.com:
-    container_name: peer0.org3.example.com
-    extends:
-      file: docker-compose-org3.yaml
-      service: peer0.org3.example.com
-    networks:
-      - basic
-
-  peer1.org3.example.com:
-    container_name: peer1.org3.example.com
-    extends:
-      file: docker-compose-org3.yaml
-      service: peer1.org3.example.com
-    networks:
-      - basic
-
-  peer2.org3.example.com:
-    container_name: peer2.org3.example.com
-    extends:
-      file: docker-compose-org3.yaml
-      service: peer2.org3.example.com
     networks:
       - basic
 
@@ -126,12 +81,7 @@ services:
       - orderer.example.com
       - peer0.org1.example.com
       - peer1.org1.example.com
-      - peer2.org1.example.com
       - peer0.org2.example.com
       - peer1.org2.example.com
-      - peer2.org2.example.com
-      - peer0.org3.example.com
-      - peer1.org3.example.com
-      - peer2.org3.example.com
     networks:
       - basic 

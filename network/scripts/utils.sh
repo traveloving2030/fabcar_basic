@@ -8,8 +8,7 @@ CONFIG_ROOT=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto
 ORDERER_CA=${CONFIG_ROOT}/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 PEER0_ORG1_CA=${CONFIG_ROOT}/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
 PEER0_ORG2_CA=${CONFIG_ROOT}/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
-PEER0_ORG3_CA=${CONFIG_ROOT}/peerOrganizations/org3.example.com/peers/peer0.org3.example.com/tls/ca.crt
-PEER0_ORG4_CA=${CONFIG_ROOT}/peerOrganizations/org4.example.com/peers/peer0.org4.example.com/tls/ca.crt
+
 
 setOrdererGlobals() {
     CORE_PEER_LOCALMSPID="OrdererMSP"
@@ -26,10 +25,8 @@ setGlobals() {
         CORE_PEER_MSPCONFIGPATH=${CONFIG_ROOT}/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
         if [ $PEER -eq 0 ]; then
             CORE_PEER_ADDRESS=peer0.org1.example.com:7051
-        elif [ $PEER -eq 1 ]; then
+        else [ $PEER -eq 1 ]; then
             CORE_PEER_ADDRESS=peer1.org1.example.com:7151
-        else
-            CORE_PEER_ADDRESS=peer2.org1.example.com:7251
         fi
     elif [ $ORG -eq 2 ]; then
         CORE_PEER_LOCALMSPID="Org2MSP"
@@ -37,32 +34,8 @@ setGlobals() {
         CORE_PEER_MSPCONFIGPATH=${CONFIG_ROOT}/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
         if [ $PEER -eq 0 ]; then
             CORE_PEER_ADDRESS=peer0.org2.example.com:8051
-        elif [ $PEER -eq 1 ]; then
+        else [ $PEER -eq 1 ]; then
             CORE_PEER_ADDRESS=peer1.org2.example.com:8151
-        else
-            CORE_PEER_ADDRESS=peer2.org2.example.com:8251
-        fi
-    elif [ $ORG -eq 3 ]; then
-        CORE_PEER_LOCALMSPID="Org3MSP"
-        CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG3_CA
-        CORE_PEER_MSPCONFIGPATH=${CONFIG_ROOT}/peerOrganizations/org3.example.com/users/Admin@org3.example.com/msp
-        if [ $PEER -eq 0 ]; then
-            CORE_PEER_ADDRESS=peer0.org3.example.com:9051
-        elif [ $PEER -eq 1 ]; then
-            CORE_PEER_ADDRESS=peer1.org3.example.com:9151
-        else
-            CORE_PEER_ADDRESS=peer2.org3.example.com:9251
-        fi
-    elif [ $ORG -eq 4 ]; then
-        CORE_PEER_LOCALMSPID="Org4MSP"
-        CORE_PEER_TLS_ROOTCERT_FILE=$PEER0_ORG4_CA
-        CORE_PEER_MSPCONFIGPATH=${CONFIG_ROOT}/peerOrganizations/org4.example.com/users/Admin@org4.example.com/msp
-        if [ $PEER -eq 0 ]; then
-            CORE_PEER_ADDRESS=peer0.org4.example.com:10051
-        elif [ $PEER -eq 1 ]; then
-            CORE_PEER_ADDRESS=peer1.org4.example.com:10151
-        else
-            CORE_PEER_ADDRESS=peer2.org4.example.com:10251
         fi
     else
         echo "================== ERROR !!! ORG Unknown =================="
