@@ -215,11 +215,11 @@ function explorerUp() {
     sed -i "s/ORG1_ADMIN_PRIVATE_KEY/${PRIV_KEY}/g" ./explorer/connection-profile/hyperledger-explorer.json
 
     # There are two bridges in the docker network, the 127.0.0.1 address remains an error when using the https protocol.
-    IPADDRESS=$(docker inspect orderer.example.com | awk 'NR == 268 {print $2}' | tr -d '",')
+    IPADDRESS=$(docker inspect orderer.example.com | awk 'NR == 258 {print $2}' | tr -d '",')
     sed -i "s/ORDERER_IP/${IPADDRESS}/g" ./explorer/connection-profile/hyperledger-explorer.json
-    IPADDRESS=$(docker inspect peer0.org1.example.com | awk 'NR == 288 {print $2}' | tr -d '",')
+    IPADDRESS=$(docker inspect peer0.org1.example.com | awk 'NR == 278 {print $2}' | tr -d '",')
     sed -i "s/PEER0ORG1_IP/${IPADDRESS}/g" ./explorer/connection-profile/hyperledger-explorer.json
-    IPADDRESS=$(docker inspect ca_peerOrg1 | awk 'NR == 237 {print $2}' | tr -d '",')
+    IPADDRESS=$(docker inspect ca_peerOrg1 | awk 'NR == 227 {print $2}' | tr -d '",')
     sed -i "s/CAORG1_IP/${IPADDRESS}/g" ./explorer/connection-profile/hyperledger-explorer.json
   fi
 

@@ -49,7 +49,7 @@
 
 	"orderers": {
 		"orderer.example.com": {
-			"url": "grpcs://ORDERER_IP:7050",
+			"url": "grpcs://172.0.0.1:7050",
 			"grpcOptions": {
 				"ssl-target-name-override": "orderer.example.com"
 			},
@@ -61,7 +61,7 @@
 
 	"peers": {
 		"peer0.org1.example.com": {
-			"url": "grpcs://PEER0ORG1_IP:7051",
+			"url": "grpcs://172.0.0.1:7051",
 			"tlsCACerts": {
 				"path": "/tmp/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
 			},
@@ -73,7 +73,7 @@
 	
 	"certificateAuthorities": {
 		"ca-org1": {
-			"url": "https://CAORG1_IP:7054",
+			"url": "https://172.0.0.1:7054",
 			"caName": "ca-org1",
 			"tlsCACerts": {
 				"path": "/tmp/crypto/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem"
